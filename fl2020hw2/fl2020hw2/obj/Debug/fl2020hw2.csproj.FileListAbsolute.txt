@@ -1,0 +1,10 @@
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\bin\Debug\fl2020hw2.exe.config
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\bin\Debug\fl2020hw2.exe
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\bin\Debug\fl2020hw2.pdb
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.csprojAssemblyReference.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.Form1.resources
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.Properties.Resources.resources
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.csproj.GenerateResource.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.csproj.CoreCompileInputs.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.exe
+C:\Users\58\Desktop\c#\repo cs\fl2020hw2\fl2020hw2\obj\Debug\fl2020hw2.pdb
