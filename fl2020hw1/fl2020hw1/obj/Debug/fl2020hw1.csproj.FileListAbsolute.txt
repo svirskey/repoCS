@@ -1,0 +1,10 @@
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\bin\Debug\fl2020hw1.exe.config
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\bin\Debug\fl2020hw1.exe
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\bin\Debug\fl2020hw1.pdb
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.csprojAssemblyReference.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.Form1.resources
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.Properties.Resources.resources
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.csproj.GenerateResource.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.csproj.CoreCompileInputs.cache
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.exe
+C:\Users\58\Desktop\c#\repo cs\fl2020hw1\fl2020hw1\obj\Debug\fl2020hw1.pdb
