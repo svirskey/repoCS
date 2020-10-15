@@ -12,32 +12,16 @@ namespace fl2020hw2
 {
     public partial class Form1 : Form
     {
+
         int wordCount = 0;
         string str=null;
-
         public Form1()
         {
             InitializeComponent();
         }
-
-        private void textFrom_KeyPress(object sender, KeyPressEventArgs e)
+        void DoLogic()
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.KeyChar = '\0';
-            }
-        }
-
-        private void textTo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar!='\b')
-            {
-                e.KeyChar = '\0';
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            wordCount = 0;
             textOutput.Text = "";
             if (textFrom.Text == "") textFrom.Text = "0";
             if (textTo.Text == "") textTo.Text = "0";
@@ -56,7 +40,7 @@ namespace fl2020hw2
                     if (str[i] != ' ') wordCount++;
                 }
             }
-            string str1=null;
+            string str1 = null;
 
             if (int.Parse(textFrom.Text) <= 0 || int.Parse(textTo.Text) < int.Parse(textFrom.Text) || int.Parse(textTo.Text) > wordCount)
             {
@@ -64,20 +48,20 @@ namespace fl2020hw2
             }
             else
             {
-                wordCount = 0;
+                int words = 0;
 
                 for (int i = 0; i < str.Length; i++)
                 {
                     if (i > 0)
                     {
                         if (str[i - 1] == ' ' && str[i] != ' ')
-                            wordCount++;
+                            words++;
                     }
                     else
                     {
-                        if (str[i] != ' ') wordCount++;
+                        if (str[i] != ' ') words++;
                     }
-                    if (wordCount >= int.Parse(textFrom.Text) && wordCount <= int.Parse(textTo.Text))
+                    if (words >= int.Parse(textFrom.Text) && words <= int.Parse(textTo.Text))
                     {
                         str1 += str[i];
                         continue;
@@ -87,6 +71,31 @@ namespace fl2020hw2
                 textOutput.Text += " ";
                 textOutput.Text += str1;
             }
+        }
+
+        private void textFrom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.KeyChar = '\0';
+            }
+        }
+        private void textTo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar!='\b')
+            {
+                e.KeyChar = '\0';
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DoLogic();
+        }
+
+        private void textInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar.ToString() == "\r")
+                DoLogic();
         }
     }
 }

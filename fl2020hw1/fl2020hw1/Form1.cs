@@ -20,7 +20,7 @@ namespace fl2020hw1
             lst = str.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
             if (TranslateToNumber()) textBox2.Text = NumToSlav();
-            else MessageBox.Show("Некорректные данные");
+            else textBox2.Text ="Некорректные данные";
         }
         private bool TranslateToNumber()
         {
