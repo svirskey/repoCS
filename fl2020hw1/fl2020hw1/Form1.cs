@@ -9,218 +9,117 @@ namespace fl2020hw1
     {
         private int num;
         private List<string> lst;
+        Dictionary<string, int> dct = null;
         public Form1()
         {
             InitializeComponent();
+
+            dct = new Dictionary<string, int>();
+
+            dct.Add("один", 1);
+            dct.Add("два", 2);
+            dct.Add("три", 3);
+            dct.Add("четыре", 4);
+            dct.Add("пять", 5);
+            dct.Add("шесть", 6);
+            dct.Add("семь", 7);
+            dct.Add("восемь", 8);
+            dct.Add("девять", 9);
+            dct.Add("десять", 10);
+            dct.Add("одиннадцать", 11);
+            dct.Add("двенадцать", 12);
+            dct.Add("тринадцать", 13);
+            dct.Add("четырнадцать", 14);
+            dct.Add("пятнадцать", 15);
+            dct.Add("шестнадцать", 16);
+            dct.Add("семнадцать", 17);
+            dct.Add("восемнадцать", 18);
+            dct.Add("девятнадцать", 19);
+            dct.Add("двадцать", 20);
+            dct.Add("тридцать", 30);
+            dct.Add("сорок", 40);
+            dct.Add("пятьдесят", 50);
+            dct.Add("шестьдесят", 60);
+            dct.Add("семьдесят", 70);
+            dct.Add("восемьдесят", 80);
+            dct.Add("девяносто", 90);
+            dct.Add("сто", 100);
+            dct.Add("двести", 200);
+            dct.Add("триста", 300);
+            dct.Add("четыреста", 400);
+            dct.Add("пятьсот", 500);
+            dct.Add("шестьсот", 600);
+            dct.Add("семьсот", 700);
+            dct.Add("восемьсот", 800);
+            dct.Add("девятьсот", 900);
         }
-        private void DoIt()
+        private bool DoIt()
         {
             num = 0;
             string str = textBox1.Text.Trim();
             lst = str.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
-            if (TranslateToNumber()) textBox2.Text = NumToSlav();
-            else textBox2.Text ="Некорректные данные";
-        }
-        private bool TranslateToNumber()
-        {
-            bool flag100 = false, flag10 = false, flag1 = false;
-            int tmp = 0;
+            bool flagHundreds = true, flagDecades = true, flagUnits = true;
 
-            for (int i = 0; i < lst.Count(); i++)
+            if (lst.Count<1)
+                return false;
+
+            for (int i = 0; i < lst.Count; i++)
             {
-                if (Hundreds(lst[i],ref tmp))
+                if (dct.ContainsKey(lst[i]))
                 {
-                    if (flag100 || flag10 || flag1) return false;
-                    flag100 = true;
-                    num += tmp;
-                    continue;
+                    if (dct[lst[i]] < 10)
+                    {
+                        if ( !flagUnits)                  
+                            return false;
+
+                        flagHundreds = false;
+                        flagDecades = false;
+                        flagUnits = false;
+                        num += dct[lst[i]];
+                    }
+
+                    else if (dct[lst[i]] < 20)
+                    {
+                        if (!flagDecades || !flagUnits)
+                            return false;
+
+                        flagHundreds = false;
+                        flagDecades = false;
+                        flagUnits = false;
+                        num += dct[lst[i]];
+                    }
+
+                    else if (dct[lst[i]] < 100)
+                    {
+                        if (!flagDecades)
+                            return false ;
+
+                        flagHundreds = false;
+                        flagDecades = false;
+                        num += dct[lst[i]];
+                    }
+                    else if (dct[lst[i]] < 1000)
+                    {
+                        if (!flagHundreds)
+                            return false;
+
+                        flagHundreds = false;
+                        num += dct[lst[i]];
+                    }
                 }
-
-                if (Decades(lst[i],ref tmp))
-                {
-                    if (flag10 || flag1) return false;
-                    flag10 = true; flag100 = true;
-                    num += tmp;
-                    continue;
-                }
-
-                if (Units(lst[i],ref tmp))
-                {
-                    if (flag1) return false;
-                    flag1 = true; flag10 = true; flag100 = true;
-                    num += tmp;
-                    continue;
-                }
-                 return false;
+                else
+                    return false;
             }
-
-        return true;
-        }
-
-        private bool Units(string word, ref int num)
-        {
-            if (word == "Один" || word == "один")
-            {
-                num = 1; return true;
-            }
-            else if (word == "Два" || word == "два")
-            {
-                num = 2; return true;
-            }
-            else if (word == "Три" || word == "три")
-            {
-                num = 3; return true;
-            }
-            else if (word == "Четыре" || word == "четыре")
-            {
-                num = 4; return true;
-            }
-            else if (word == "Пять" || word == "пять")
-            {
-                num = 5; return true;
-            }
-            else if (word == "Шесть" || word == "шесть")
-            {
-                num = 6; return true;
-            }
-            else if (word == "Семь" || word == "семь")
-            {
-                num = 7; return true;
-            }
-            else if (word == "Восемь" || word == "восемь")
-            {
-                num = 8; return true;
-            }
-            else if (word == "Девять" || word == "девять")
-            {
-                num = 9; return true;
-            }
-            else if (word == "Десять" || word == "десять")
-            {
-                num = 10; return true;
-            }
-            else if (word == "Одиннадцать" || word == "одиннадцать")
-            {
-                num = 11; return true;
-            }
-            else if (word == "Двенадцать" || word == "двенацдать")
-            {
-                num = 12; return true;
-            }
-            else if (word == "Тринадцать" || word == "тринадцать")
-            {
-                num = 13; return true;
-            }
-            else if (word == "Четырнадцать" || word == "четырнадцать")
-            {
-                num = 14; return true;
-            }
-            else if (word == "Пятнадцать" || word == "пятнадцать")
-            {
-                num = 15; return true;
-            }
-            else if (word == "Шестнадцать" || word == "шестнадцать")
-            {
-                num = 16; return true;
-            }
-            else if (word == "Семнадцать" || word == "семнадцать")
-            {
-                num = 17; return true;
-            }
-            else if (word == "Восемнадцать" || word == "восемнадцать")
-            {
-                num = 18; return true;
-            }
-            else if (word == "Девятнадцать" || word == "девятнадцать")
-            {
-                num = 19; return true;
-            }
-            return false;
-        }
-
-        private bool Decades(string word, ref int num)
-        {
-            if (word == "Двадцать" || word == "двадцать")
-            {
-                num = 20; return true;
-            }
-            else if (word == "Тридцать" || word == "тридцать")
-            {
-                num = 30; return true;
-            }
-            else if (word == "Сорок" || word == "сорок")
-            {
-                num = 40; return true;
-            }
-            else if (word == "Пятьдесят" || word == "пятьдесят")
-            {
-                num = 50; return true;
-            }
-            else if (word == "Шестьдесят" || word == "шестьдесят")
-            {
-                num = 60; return true;
-            }
-            else if (word == "Семьдесят" || word == "семьдесят")
-            {
-                num = 70; return true;
-            }
-            else if (word == "Восемьдесят" || word == "восемьдесят")
-            {
-                num = 80; return true;
-            }
-            else if (word == "Девяносто" || word == "девяносто")
-            {
-                num = 90; return true;
-            }
-            return false;
-        }
-
-        private bool Hundreds(string word, ref int num)
-        {
-            if (word == "Сто" || word == "сто")
-            {
-                num = 100; return true;
-            }
-            else if (word == "Двести" || word == "двести")
-            {
-                num = 200; return true;
-            }
-            else if (word == "Триста" || word == "триста")
-            {
-                num = 300; return true;
-            }
-            else if (word == "Четыреста" || word == "четыреста")
-            {
-                num = 400; return true;
-            }
-            else if (word == "Пятьсот" || word == "пятьсот")
-            {
-                num = 500; return true;
-            }
-            else if (word == "Шестьсот" || word == "шестьсот")
-            {
-                num = 600; return true;
-            }
-            else if (word == "Семьсот" || word == "семьсот")
-            {
-                num = 700; return true;
-            }
-            else if (word == "Восемьсот" || word == "восемьсот")
-            {
-                num = 800; return true;
-            }
-            else if (word == "Девятьсот" || word == "девятьсот")
-            {
-                num = 900; return true;
-            }
-
-        return false;
+            return true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DoIt();
+             if (DoIt())  
+                textBox2.Text = NumToSlav();
+             else     
+                textBox2.Text = "Некорректные данные";      
         }
 
         private string NumToSlav()
