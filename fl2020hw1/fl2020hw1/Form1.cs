@@ -9,174 +9,163 @@ namespace fl2020hw1
     {
         private int num;
         private List<string> lst;
-        Dictionary<string, int> dct = null;
+        Dictionary<string, (int num, int ind)> dct = null;
+        Dictionary<int, string> err = null;
+        Dictionary<int, string> slav = null;
         public Form1()
         {
             InitializeComponent();
 
-            dct = new Dictionary<string, int>();
+            dct = new Dictionary<string, (int, int)>();
+            err = new Dictionary<int, string>();
+            slav = new Dictionary<int, string>();
 
-            dct.Add("один", 1);
-            dct.Add("два", 2);
-            dct.Add("три", 3);
-            dct.Add("четыре", 4);
-            dct.Add("пять", 5);
-            dct.Add("шесть", 6);
-            dct.Add("семь", 7);
-            dct.Add("восемь", 8);
-            dct.Add("девять", 9);
-            dct.Add("десять", 10);
-            dct.Add("одиннадцать", 11);
-            dct.Add("двенадцать", 12);
-            dct.Add("тринадцать", 13);
-            dct.Add("четырнадцать", 14);
-            dct.Add("пятнадцать", 15);
-            dct.Add("шестнадцать", 16);
-            dct.Add("семнадцать", 17);
-            dct.Add("восемнадцать", 18);
-            dct.Add("девятнадцать", 19);
-            dct.Add("двадцать", 20);
-            dct.Add("тридцать", 30);
-            dct.Add("сорок", 40);
-            dct.Add("пятьдесят", 50);
-            dct.Add("шестьдесят", 60);
-            dct.Add("семьдесят", 70);
-            dct.Add("восемьдесят", 80);
-            dct.Add("девяносто", 90);
-            dct.Add("сто", 100);
-            dct.Add("двести", 200);
-            dct.Add("триста", 300);
-            dct.Add("четыреста", 400);
-            dct.Add("пятьсот", 500);
-            dct.Add("шестьсот", 600);
-            dct.Add("семьсот", 700);
-            dct.Add("восемьсот", 800);
-            dct.Add("девятьсот", 900);
+            err.Add(1, "единичного формата");
+            err.Add(2, "формата 10-19");
+            err.Add(3, "десятичного формата");
+            err.Add(4, "формата сотен");
+
+            dct.Add("один", (1, 1));
+            dct.Add("два", (2, 1));
+            dct.Add("три", (3, 1));
+            dct.Add("четыре", (4, 1));
+            dct.Add("пять", (5, 1));
+            dct.Add("шесть", (6, 1));
+            dct.Add("семь", (7, 1));
+            dct.Add("восемь", (8, 1));
+            dct.Add("девять", (9, 1));
+            dct.Add("десять", (10, 2));
+            dct.Add("одиннадцать", (11, 2));
+            dct.Add("двенадцать", (12, 2));
+            dct.Add("тринадцать", (13, 2));
+            dct.Add("четырнадцать", (14, 2));
+            dct.Add("пятнадцать", (15, 2));
+            dct.Add("шестнадцать", (16, 2));
+            dct.Add("семнадцать", (17, 2));
+            dct.Add("восемнадцать", (18, 2));
+            dct.Add("девятнадцать", (19, 2));
+            dct.Add("двадцать", (20, 3));
+            dct.Add("тридцать", (30, 3));
+            dct.Add("сорок", (40, 3));
+            dct.Add("пятьдесят", (50, 3));
+            dct.Add("шестьдесят", (60, 3));
+            dct.Add("семьдесят", (70, 3));
+            dct.Add("восемьдесят", (80, 3));
+            dct.Add("девяносто", (90, 3));
+            dct.Add("сто", (100, 4));
+            dct.Add("двести", (200, 4));
+            dct.Add("триста", (300, 4));
+            dct.Add("четыреста", (400, 4));
+            dct.Add("пятьсот", (500, 4));
+            dct.Add("шестьсот", (600, 4));
+            dct.Add("семьсот", (700, 4));
+            dct.Add("восемьсот", (800, 4));
+            dct.Add("девятьсот", (900, 4));
+
+            slav.Add(500, "Ф");
+            slav.Add(100, "Р");
+            slav.Add(30, "Л");
+            slav.Add(8, "И");
+            slav.Add(2, "В");
+            slav.Add(1, "A"); 
         }
+
+        private bool find(int from, int to)
+        {
+            if (dct[lst[from]].ind == dct[lst[to]].ind)
+            {
+                MessageBox.Show($"Два числа {err[dct[lst[from]].ind]}");
+                return false;
+            }
+
+            if (dct[lst[from]].ind < dct[lst[to]].ind)
+            {
+                MessageBox.Show($"Число {err[dct[lst[from]].ind]} перед числом {err[dct[lst[to]].ind]}");
+                return false;
+            }
+
+            if (dct[lst[from]].ind==2 && dct[lst[to]].ind==1)
+            {
+                MessageBox.Show($"Число {err[dct[lst[from]].ind]} перед числом {err[dct[lst[to]].ind]}");
+                return false;
+            }
+            return true;
+        }
+
         private bool DoIt()
         {
             num = 0;
-            string str = textBox1.Text.Trim();
+            string str = textBoxInput.Text.Trim();
             lst = str.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries).ToList<string>();
 
-            bool flagHundreds = true, flagDecades = true, flagUnits = true;
-
-            if (lst.Count<1)
+            if (lst.Count == 0)
+            {
+                MessageBox.Show("Пустая строка!");
                 return false;
+            }
+
+            if (lst.Count > 3)
+            {
+                MessageBox.Show("Слишком много слов!");
+                return false;
+            }
 
             for (int i = 0; i < lst.Count; i++)
             {
-                if (dct.ContainsKey(lst[i]))
+                if (!dct.ContainsKey(lst[i]))
                 {
-                    if (dct[lst[i]] < 10)
-                    {
-                        if ( !flagUnits)                  
-                            return false;
-
-                        flagHundreds = false;
-                        flagDecades = false;
-                        flagUnits = false;
-                        num += dct[lst[i]];
-                    }
-
-                    else if (dct[lst[i]] < 20)
-                    {
-                        if (!flagDecades || !flagUnits)
-                            return false;
-
-                        flagHundreds = false;
-                        flagDecades = false;
-                        flagUnits = false;
-                        num += dct[lst[i]];
-                    }
-
-                    else if (dct[lst[i]] < 100)
-                    {
-                        if (!flagDecades)
-                            return false ;
-
-                        flagHundreds = false;
-                        flagDecades = false;
-                        num += dct[lst[i]];
-                    }
-                    else if (dct[lst[i]] < 1000)
-                    {
-                        if (!flagHundreds)
-                            return false;
-
-                        flagHundreds = false;
-                        num += dct[lst[i]];
-                    }
-                }
-                else
+                    MessageBox.Show($"Некорректное слово {lst[i]}");
                     return false;
+                }
+            }
+
+            if (lst.Count == 2)
+            {
+                if (!find(0, 1)) return false; 
+            }
+           
+            if (lst.Count==3)
+            {
+                if (!find(0, 1)) return false;
+                if (!find(0, 2)) return false;
+                if (!find(1, 2)) return false;
+            }
+
+            for (int i = 0; i < lst.Count; i++)
+            {
+                num += dct[lst[i]].num;
             }
             return true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-             if (DoIt())  
-                textBox2.Text = NumToSlav();
-             else     
-                textBox2.Text = "Некорректные данные";      
+            if (DoIt())
+            {
+                textBoxArabian.Text = num.ToString();
+                textBoxSlav.Text = NumToSlav();
+            }
+            else
+            {
+                textBoxArabian.Text = "\0";
+                textBoxSlav.Text = "\0";
+            }
         }
 
         private string NumToSlav()
         {
-            string old = null ;
-            /*
-            А - 1
-            В - 2
-            И - 8
-            Л - 30
-            Р - 100
-            Ф - 500
-            */
-            int tmp;
-            tmp = num / 500;
-            if (tmp != 0)
-            {
-                old += 'Ф';
-                num -= (500 * tmp);
-            }
-            tmp = num / 100;
-            if (tmp != 0)
-            {
-                for (int i = 0; i < tmp; i++) old += 'Р';
-                num -= (100 * tmp);
-            }
-            tmp = num / 30;
-            if (tmp != 0)
-            {
-                for (int i = 0; i < tmp; i++) old += 'Л';
-                num -= (30 * tmp);
-            }
-            tmp = num / 8;
-            if (tmp != 0)
-            {
-                for (int i = 0; i < tmp; i++) old += 'И';
-                num -= (8 * tmp);
-            }
-            tmp = num / 2;
-            if (tmp != 0)
-            {
-                for (int i = 0; i < tmp; i++) old += 'В';
-                num -= (2 * tmp);
-            }
+            string str = null;
+            int varNum = num;
 
-            if (num != 0)
+            foreach (var key in slav.Keys)
             {
-                for (int i = 0; i < num; i++) old += 'А';
-                num--;
+                while (varNum>=key)
+                {
+                    varNum -= key;
+                    str += slav[key];
+                }
             }
-            return old;
-        }
-
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar.ToString() == "\r") 
-                DoIt();
+            return str;
         }
     }
 }
