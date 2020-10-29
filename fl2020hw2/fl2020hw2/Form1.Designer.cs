@@ -39,7 +39,7 @@
             // 
             // textInput
             // 
-            this.textInput.Location = new System.Drawing.Point(146, 27);
+            this.textInput.Location = new System.Drawing.Point(35, 30);
             this.textInput.Name = "textInput";
             this.textInput.Size = new System.Drawing.Size(172, 20);
             this.textInput.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(149, 121);
+            this.button1.Location = new System.Drawing.Point(179, 121);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 68);
             this.button1.TabIndex = 1;
@@ -57,7 +57,7 @@
             // 
             // textOutput
             // 
-            this.textOutput.Location = new System.Drawing.Point(407, 27);
+            this.textOutput.Location = new System.Drawing.Point(296, 30);
             this.textOutput.Name = "textOutput";
             this.textOutput.ReadOnly = true;
             this.textOutput.Size = new System.Drawing.Size(166, 20);
@@ -65,24 +65,24 @@
             // 
             // textFrom
             // 
-            this.textFrom.Location = new System.Drawing.Point(146, 82);
+            this.textFrom.Location = new System.Drawing.Point(179, 85);
             this.textFrom.Name = "textFrom";
-            this.textFrom.Size = new System.Drawing.Size(31, 20);
+            this.textFrom.Size = new System.Drawing.Size(43, 20);
             this.textFrom.TabIndex = 3;
             this.textFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textFrom_KeyPress);
             // 
             // textTo
             // 
-            this.textTo.Location = new System.Drawing.Point(196, 82);
+            this.textTo.Location = new System.Drawing.Point(279, 85);
             this.textTo.Name = "textTo";
-            this.textTo.Size = new System.Drawing.Size(30, 20);
+            this.textTo.Size = new System.Drawing.Size(42, 20);
             this.textTo.TabIndex = 4;
             this.textTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textTo_KeyPress);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(146, 68);
+            this.label1.Location = new System.Drawing.Point(176, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 13);
             this.label1.TabIndex = 5;
@@ -91,7 +91,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(193, 68);
+            this.label2.Location = new System.Drawing.Point(276, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 13);
             this.label2.TabIndex = 6;
@@ -102,7 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(631, 261);
+            this.ClientSize = new System.Drawing.Size(516, 261);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textTo);

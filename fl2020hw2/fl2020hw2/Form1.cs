@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace fl2020hw2
@@ -28,6 +21,11 @@ namespace fl2020hw2
 
             str = textInput.Text;
 
+            if (str=="")
+            {
+                MessageBox.Show("Пустая строка на входе");
+                return;
+            }
             for (int i = 0; i < str.Length; i++)
             {
                 if (i > 0)
@@ -42,35 +40,53 @@ namespace fl2020hw2
             }
             string str1 = null;
 
-            if (int.Parse(textFrom.Text) <= 0 || int.Parse(textTo.Text) < int.Parse(textFrom.Text) || int.Parse(textTo.Text) > wordCount)
+            if (int.Parse(textFrom.Text) <= 0)
             {
-                textOutput.Text = "Неверные данные!";
+                MessageBox.Show($"Некорректное начало диапазона: \"{textFrom.Text}\"") ;
+                return;
             }
-            else
-            {
-                int words = 0;
 
-                for (int i = 0; i < str.Length; i++)
-                {
-                    if (i > 0)
-                    {
-                        if (str[i - 1] == ' ' && str[i] != ' ')
-                            words++;
-                    }
-                    else
-                    {
-                        if (str[i] != ' ') words++;
-                    }
-                    if (words >= int.Parse(textFrom.Text) && words <= int.Parse(textTo.Text))
-                    {
-                        str1 += str[i];
-                        continue;
-                    }
-                    textOutput.Text += str[i];
-                }
-                textOutput.Text += " ";
-                textOutput.Text += str1;
+            if (int.Parse(textFrom.Text) <= 0)
+            {
+                MessageBox.Show($"Некорректный конец диапазона: \"{textTo.Text}\""); 
+                return;
             }
+
+            if (int.Parse(textTo.Text) < int.Parse(textFrom.Text))
+            {
+                MessageBox.Show($"Начало диапазона (\"{textFrom.Text}\") больше конца (\"{textTo.Text}\")"); 
+                return;
+            }
+
+            if (int.Parse(textTo.Text) > wordCount)
+            {
+                MessageBox.Show($"Конец диапазона (\"{textTo.Text}\") больше количества слов (\"{wordCount}\")"); 
+                return;
+            }
+
+            int words = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (i > 0)
+                {
+                    if (str[i - 1] == ' ' && str[i] != ' ')
+                        words++;
+                }
+                else
+                {
+                    if (str[i] != ' ') words++;
+                }
+                if (words >= int.Parse(textFrom.Text) && words <= int.Parse(textTo.Text))
+                {
+                    str1 += str[i];
+                    continue;
+                }
+                textOutput.Text += str[i];
+            }
+            textOutput.Text += " ";
+            textOutput.Text += str1;
+            
         }
 
         private void textFrom_KeyPress(object sender, KeyPressEventArgs e)
@@ -97,5 +113,6 @@ namespace fl2020hw2
             if (e.KeyChar.ToString() == "\r")
                 DoLogic();
         }
+
     }
 }
