@@ -5,18 +5,26 @@ using System.Windows.Forms;
 
 namespace fl2020hw1
 {
+
     public partial class Form1 : Form
     {
         private int num;
         private List<string> lst;
-        Dictionary<string, (int num, int ind)> dct = null;
-        Dictionary<int, string> err = null;
-        Dictionary<int, string> slav = null;
+        private Dictionary<string, (int num, numberFormat ind)> dct = null;
+        private Dictionary<int, string> err = null;
+        private Dictionary<int, string> slav = null;
+        public enum numberFormat
+        {
+            single=1,
+            ten_nineteen=2,
+            decades=3,
+            hundreds=4
+        }
         public Form1()
         {
             InitializeComponent();
 
-            dct = new Dictionary<string, (int, int)>();
+            dct = new Dictionary<string, (int, numberFormat)>();
             err = new Dictionary<int, string>();
             slav = new Dictionary<int, string>();
 
@@ -25,42 +33,42 @@ namespace fl2020hw1
             err.Add(3, "десятичного формата");
             err.Add(4, "формата сотен");
 
-            dct.Add("один", (1, 1));
-            dct.Add("два", (2, 1));
-            dct.Add("три", (3, 1));
-            dct.Add("четыре", (4, 1));
-            dct.Add("пять", (5, 1));
-            dct.Add("шесть", (6, 1));
-            dct.Add("семь", (7, 1));
-            dct.Add("восемь", (8, 1));
-            dct.Add("девять", (9, 1));
-            dct.Add("десять", (10, 2));
-            dct.Add("одиннадцать", (11, 2));
-            dct.Add("двенадцать", (12, 2));
-            dct.Add("тринадцать", (13, 2));
-            dct.Add("четырнадцать", (14, 2));
-            dct.Add("пятнадцать", (15, 2));
-            dct.Add("шестнадцать", (16, 2));
-            dct.Add("семнадцать", (17, 2));
-            dct.Add("восемнадцать", (18, 2));
-            dct.Add("девятнадцать", (19, 2));
-            dct.Add("двадцать", (20, 3));
-            dct.Add("тридцать", (30, 3));
-            dct.Add("сорок", (40, 3));
-            dct.Add("пятьдесят", (50, 3));
-            dct.Add("шестьдесят", (60, 3));
-            dct.Add("семьдесят", (70, 3));
-            dct.Add("восемьдесят", (80, 3));
-            dct.Add("девяносто", (90, 3));
-            dct.Add("сто", (100, 4));
-            dct.Add("двести", (200, 4));
-            dct.Add("триста", (300, 4));
-            dct.Add("четыреста", (400, 4));
-            dct.Add("пятьсот", (500, 4));
-            dct.Add("шестьсот", (600, 4));
-            dct.Add("семьсот", (700, 4));
-            dct.Add("восемьсот", (800, 4));
-            dct.Add("девятьсот", (900, 4));
+            dct.Add("один", (1, numberFormat.single));
+            dct.Add("два", (2, numberFormat.single));
+            dct.Add("три", (3, numberFormat.single));
+            dct.Add("четыре", (4, numberFormat.single));
+            dct.Add("пять", (5, numberFormat.single));
+            dct.Add("шесть", (6, numberFormat.single));
+            dct.Add("семь", (7, numberFormat.single));
+            dct.Add("восемь", (8, numberFormat.single));
+            dct.Add("девять", (9, numberFormat.single));
+            dct.Add("десять", (10, numberFormat.ten_nineteen));
+            dct.Add("одиннадцать", (11, numberFormat.ten_nineteen));
+            dct.Add("двенадцать", (12, numberFormat.ten_nineteen));
+            dct.Add("тринадцать", (13, numberFormat.ten_nineteen));
+            dct.Add("четырнадцать", (14, numberFormat.ten_nineteen));
+            dct.Add("пятнадцать", (15, numberFormat.ten_nineteen));
+            dct.Add("шестнадцать", (16, numberFormat.ten_nineteen));
+            dct.Add("семнадцать", (17, numberFormat.ten_nineteen));
+            dct.Add("восемнадцать", (18, numberFormat.ten_nineteen));
+            dct.Add("девятнадцать", (19, numberFormat.ten_nineteen));
+            dct.Add("двадцать", (20, numberFormat.decades));
+            dct.Add("тридцать", (30, numberFormat.decades));
+            dct.Add("сорок", (40, numberFormat.decades));
+            dct.Add("пятьдесят", (50, numberFormat.decades));
+            dct.Add("шестьдесят", (60, numberFormat.decades));
+            dct.Add("семьдесят", (70, numberFormat.decades));
+            dct.Add("восемьдесят", (80, numberFormat.decades));
+            dct.Add("девяносто", (90, numberFormat.decades));
+            dct.Add("сто", (100, numberFormat.hundreds));
+            dct.Add("двести", (200, numberFormat.hundreds));
+            dct.Add("триста", (300, numberFormat.hundreds));
+            dct.Add("четыреста", (400, numberFormat.hundreds));
+            dct.Add("пятьсот", (500, numberFormat.hundreds));
+            dct.Add("шестьсот", (600, numberFormat.hundreds));
+            dct.Add("семьсот", (700, numberFormat.hundreds));
+            dct.Add("восемьсот", (800, numberFormat.hundreds));
+            dct.Add("девятьсот", (900, numberFormat.hundreds));
 
             slav.Add(500, "Ф");
             slav.Add(100, "Р");
@@ -72,21 +80,32 @@ namespace fl2020hw1
 
         private bool find(int from, int to)
         {
+            if (dct[lst[from]].num == dct[lst[to]].num)
+            {
+                MessageBox.Show($"Два одинаковых числа \"{lst[from]}\" ");
+                return false;
+            }
             if (dct[lst[from]].ind == dct[lst[to]].ind)
             {
-                MessageBox.Show($"Два числа {err[dct[lst[from]].ind]}");
+                MessageBox.Show($"Два числа \"{lst[from]}\" и \"{lst[to]}\" {err[(int)dct[lst[from]].ind]}");
                 return false;
             }
 
             if (dct[lst[from]].ind < dct[lst[to]].ind)
             {
-                MessageBox.Show($"Число {err[dct[lst[from]].ind]} перед числом {err[dct[lst[to]].ind]}");
+                MessageBox.Show($"Число {err[(int)dct[lst[from]].ind]} \"{lst[from]}\" перед числом {err[(int)dct[lst[to]].ind]} \"{lst[to]}\"");
                 return false;
             }
 
-            if (dct[lst[from]].ind==2 && dct[lst[to]].ind==1)
+            if (dct[lst[from]].ind==numberFormat.ten_nineteen && dct[lst[to]].ind== numberFormat.single)
             {
-                MessageBox.Show($"Число {err[dct[lst[from]].ind]} перед числом {err[dct[lst[to]].ind]}");
+                MessageBox.Show($"Число {err[(int)dct[lst[from]].ind]} \"{lst[from]}\" перед числом {err[(int)dct[lst[to]].ind]} \"{lst[to]}\"");
+                return false;
+            }
+
+            if (dct[lst[from]].ind == numberFormat.decades && dct[lst[to]].ind == numberFormat.ten_nineteen)
+            {
+                MessageBox.Show($"Число {err[(int)dct[lst[from]].ind]} \"{lst[from]}\" перед числом {err[(int)dct[lst[to]].ind]} \"{lst[to]}\" ");
                 return false;
             }
             return true;
@@ -114,7 +133,7 @@ namespace fl2020hw1
             {
                 if (!dct.ContainsKey(lst[i]))
                 {
-                    MessageBox.Show($"Некорректное слово {lst[i]}");
+                    MessageBox.Show($"Некорректное слово \"{lst[i]}\"");
                     return false;
                 }
             }
@@ -124,7 +143,7 @@ namespace fl2020hw1
                 if (!find(0, 1)) return false; 
             }
            
-            if (lst.Count==3)
+            if (lst.Count == 3)
             {
                 if (!find(0, 1)) return false;
                 if (!find(0, 2)) return false;
