@@ -1,0 +1,10 @@
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\bin\Debug\frenchRefact.exe.config
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\bin\Debug\frenchRefact.exe
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\bin\Debug\frenchRefact.pdb
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.csprojAssemblyReference.cache
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.Form1.resources
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.Properties.Resources.resources
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.csproj.GenerateResource.cache
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.csproj.CoreCompileInputs.cache
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.exe
+C:\Users\58\source\repos\repoCS\frenchRefact\frenchRefact\obj\Debug\frenchRefact.pdb

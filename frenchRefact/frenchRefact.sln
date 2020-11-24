@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30621.155
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "frenchRefact", "frenchRefact\frenchRefact.csproj", "{EA3C6D57-F748-48EA-BE53-6A92D0BCF3FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EA3C6D57-F748-48EA-BE53-6A92D0BCF3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA3C6D57-F748-48EA-BE53-6A92D0BCF3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA3C6D57-F748-48EA-BE53-6A92D0BCF3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA3C6D57-F748-48EA-BE53-6A92D0BCF3FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34E7EF53-FD6D-41CC-865D-83670009A98E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\bin\Debug\hw1french.exe.config
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\bin\Debug\hw1french.exe
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\bin\Debug\hw1french.pdb
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.csprojAssemblyReference.cache
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.Form1.resources
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.Properties.Resources.resources
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.csproj.GenerateResource.cache
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.csproj.CoreCompileInputs.cache
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.exe
+C:\Users\58\source\repos\repoCS\hw1french\hw1french\obj\Debug\hw1french.pdb
