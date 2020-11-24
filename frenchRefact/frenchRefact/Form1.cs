@@ -66,15 +66,23 @@ namespace frenchRefact
             error.Add(1, "десятков");
             error.Add(2, "10-16");
             error.Add(3, "единиц");
-
         }
 
-        bool GoodOrNot(int num, int add,string addName, string[] names) 
+        bool GoodOrNot(int num, int add,string[] addNames, string[] names) 
         {
             var len = (add.ToString()).Length;
             int addNum;
 
-            var addNameSplit= addName.Split(' ');
+            string addName="";
+
+            for (int i=0; i<addNames.Length;i++)
+            {
+                if (addNames[i] != "")
+                {
+                    addName = addNames[i];
+                    break;
+                }                    
+            }
 
             if (num == 0)
                 return true;
@@ -102,10 +110,7 @@ namespace frenchRefact
                                 }
                                 else
                                 {
-                                    if (addName=="cent")
-                                        MessageBox.Show($"Число \"{names[i]}\" формата {error[i]} перед числом \"{addNameSplit[0]}\" формата {error[addNum]}");
-                                    else
-                                        MessageBox.Show($"Число \"{names[i]}\" формата {error[i]} перед числом \"{addNameSplit[0]} {addNameSplit[1]}\" формата {error[addNum]}");
+                                    MessageBox.Show($"Число \"{names[i]}\" формата {error[i]} перед числом \"{addName}\" формата {error[addNum]}");
                                     return false;
                                 }
                                
@@ -150,7 +155,6 @@ namespace frenchRefact
                                     }
                                     else
                                     {
-                                       // if ()
                                         MessageBox.Show($"Число \"{names[i]}\" формата {error[i]} перед числом \"{addName}\" формата {error[addNum]}");
                                         return false;
                                     }
@@ -158,7 +162,7 @@ namespace frenchRefact
                             }
                             return false;
                         }
-                        else //(add < 17 && add > 9)
+                        else 
                         {
                             for (int i = 3; i >1; i--)
                             {
@@ -181,8 +185,7 @@ namespace frenchRefact
                     }
                 case 1:
                     {
-                        addNum = 3;
-                        
+                        addNum = 3;                      
 
                         if (addName==names[addNum])
                         {
@@ -229,7 +232,11 @@ namespace frenchRefact
                                "",    // decades  20-90
                                "",    // f10-16   10-16
                                "" };  // units    1-9
-             
+
+            string[] addNames = { "",    // hundreds 100-900
+                                  "",    // decades  20-90
+                                  "",    // f10-16   10-16
+                                  "" };  // units    1-9
 
 
             if (lst.Count == 0)
@@ -260,137 +267,119 @@ namespace frenchRefact
             }
 
             int prev = 0;
+
             bool flag = true,
                  flagFirst = true;
-
-            string addName = "";
 
             for (int i=0; i<lst.Count; i++)
             {
                 flag = true;
+
                 if (prev==0) // begin
                 {
                     prev = dct[lst[i]];
-                    addName = lst[i];
                     flag = false;
                 }
                 else if (prev==4 && dct[lst[i]]==20) // 80
                 {
                     prev *= dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if ((prev==80||prev==60) && dct[lst[i]] == 10) // 70 & 90
                 {
                     prev += dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if ((prev == 80 || prev == 60) && dct[lst[i]]  <17) // 60-76 & 80-96 without 70 & 90
                 {
                     prev += dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if ((prev == 90 || prev == 70) && dct[lst[i]] > 6 && dct[lst[i]] < 10) // 77-79 & 97-99 
                 {
                     prev += dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if (prev < 10 && prev > 1 && dct[lst[i]] == 100) // 100-900
                 {
                     prev *= dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if (prev < 70 && prev % 10==0 && prev > 10 && dct[lst[i]] > 0 && dct[lst[i]] < 10) // 21-29 ... 61-69
                 {
                     prev += dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
                 else if (prev== 10 && dct[lst[i]] > 6 && dct[lst[i]] < 10) // 17-19
                 {
                     prev += dct[lst[i]];
-                    addName = addName + " " + lst[i];
                     flag = false;
                 }
 
                 else if (i!=lst.Count-1)
                 {
-                   if (flagFirst)
-                    {
-                        getName(names, prev, lst, i - 1);
+                    getName(addNames, prev, lst, i - 1);
+
+                    if (flagFirst)
+                    {               
                         flagFirst = false;
 
-                        if (GoodOrNot(num, prev,addName, names))
+                        if (GoodOrNot(num, prev,addNames, names)) //TODO
                         {
-                            
+                            getName(names, prev, lst, i - 1);
+                            clearNames(addNames);
                             num += prev;
                             prev = dct[lst[i]];
-                            addName = lst[i];
                         }
                         else
-                        {
                             return false;
-                        }
                     }
-                   else
+                    else
                     {
-                        if (GoodOrNot(num, prev,addName, names))
+                        if (GoodOrNot(num, prev,addNames, names))
                         {
-                             getName(names, prev, lst, i - 1);
+                            getName(names, prev, lst, i - 1);
+                            clearNames(addNames);
                             num += prev;
                             prev = dct[lst[i]];
-                            addName = lst[i];
                         }
                         else
-                        {
                             return false;
-                        }
-                    }
-                     
+                    }                  
                 }
 
-                 if (i==lst.Count-1)
+                if (i==lst.Count-1)
                 {
                     if (flag)
                     {
-                        if (flagFirst)
-                        {
-                            getName(names, prev, lst, i - 1);
-                            flagFirst = false;
-                        }
+                        getName(addNames, prev, lst, i - 1);
 
-                        if (GoodOrNot(num, prev, addName, names))
+                        if (GoodOrNot(num, prev, addNames, names))
                         {
                             getName(names, prev, lst, i - 1);
+                            clearNames(addNames);
                             num += prev;
                             prev = dct[lst[i]];
-                            addName = lst[i];
+
+                            getName(addNames, prev, lst, i);
                         }
                         else
                             return false;
 
-                        if (GoodOrNot(num, prev,addName, names))
+                        if (GoodOrNot(num, prev,addNames, names))
                             num += prev;
                         else
                             return false;
                     }
                     else
                     {
-                        if (flagFirst)
-                        {
-                            getName(names, prev, lst, i);
-                            flagFirst = false;
-                        }
-                        if (GoodOrNot(num, prev,addName, names))
+                        getName(addNames, prev, lst, i);
+
+                        if (GoodOrNot(num, prev,addNames, names))
                             num += prev;
                         else
                             return false;
-                    }
-                      
+                    }                      
                 }
             }       
             return true;
@@ -414,11 +403,6 @@ namespace frenchRefact
             {
                 names[1] = lst[i - 1] + " " + lst[i];
             }
-            else if (prev == 70)
-            {
-                names[1] = lst[i - 1];
-                names[2] =lst[i];
-            }   
             else if (prev == 90)
             {
                 names[1] = lst[i - 2] + " " + lst[i - 1];
@@ -431,20 +415,22 @@ namespace frenchRefact
             }
             else if (prev > 96)
             {
-                names[1] = lst[i - 3] + " " + lst[i - 2] + " " + lst[i - 1];
+                names[1] = lst[i - 3] + " " + lst[i - 2];
+                names[2]= lst[i - 1];
                 names[3] = lst[i];
             }
-            else if ((prev > 80 && prev < 90) || (prev > 76 && prev < 80))
+            else if (prev > 80 && prev < 90)
             {
                 names[1] = lst[i - 2] + " " + lst[i - 1];
                 names[3] = lst[i];
             }
-            else if ((prev > 80 && prev < 90) || (prev > 76 && prev < 80))
+            else if (prev > 76 && prev < 80)
             {
-                names[1] = lst[i - 2] + " " + lst[i - 1];
+                names[1] = lst[i - 2];
+                names[2] = lst[i - 1];
                 names[3] = lst[i];
             }
-            else if (prev > 70 && prev < 77)
+            else if (prev >= 70 && prev < 77)
             {
                 names[1] = lst[i - 1];
                 names[2] = lst[i];
@@ -498,5 +484,12 @@ namespace frenchRefact
             }
             return str;
         }
+
+        private void clearNames(string[] names)
+        {
+            for (int i=0; i<names.Length;i++)
+                names[i] = "";
+        }
     }
 }
+
